@@ -30,6 +30,6 @@
           "avoidEscape": true,
           "allowTemplateLiterals": true
         }],
-    "semi": "error"
-  }
+        "semi": "error"
+    }
 }
