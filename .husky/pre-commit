@@ -1,0 +1,6 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+echo "Running 'npm run lint:fix'"
+
+npm run lint:fix

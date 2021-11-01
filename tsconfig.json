@@ -1,0 +1,26 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "outDir": "build",
+    "importHelpers": true,
+    "noEmitHelpers": true,
+    "noImplicitAny": false,
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "lib": ["ESNext"],
+    "strict": true,
+    "skipLibCheck": true,
+    "typeRoots": ["./node_modules/@types", "./src/typings"],
+    "baseUrl": ".",
+    "paths": {
+      "handlers/*": ["./src/handlers/*"],
+      "structures/*": ["./src/structures/*"],
+      "typings/*": ["./src/typings/*"],
+      "utils/*": ["./src/utils/*"],
+    },
+  },
+  "exclude": ["node_modules", ".github", ".husky", ".vscode", "**/*.md"],
+  "include": ["src/**/*.ts", "src/**/*.json"]
+}
