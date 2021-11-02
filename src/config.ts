@@ -16,7 +16,7 @@ function validateEnv() {
     if (error) throw new Error(`Failed to validate ProcessEnv: ${error.message}`);
 
     if (!process.env.GUILD && process.env.NODE_ENV === "development")
-        throw new Error("Failed to validate ProcessEnv: GUILD must not be non-existent, empty or only contains whitespaces on development builds.");
+        throw new Error("Failed to validate ProcessEnv: GUILD must exist on development builds.");
 
     return value;
 }
