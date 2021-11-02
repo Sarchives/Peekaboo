@@ -2,7 +2,6 @@ import "dotenv/config";
 
 import Joi from "joi";
 import { ClientOptions, Intents, LimitedCollection, Options } from "discord.js";
-import validateString from "utils/string";
 
 function validateEnv() {
     const schema = Joi.object({
@@ -16,7 +15,7 @@ function validateEnv() {
 
     if (error) throw new Error(`Failed to validate ProcessEnv: ${error.message}`);
 
-    if (!validateString(process.env.GUILD) && process.env.NODE_ENV === "development")
+    if (!process.env.GUILD && process.env.NODE_ENV === "development")
         throw new Error("Failed to validate ProcessEnv: GUILD must not be non-existent, empty or only contains whitespaces on development builds.");
 
     return value;
