@@ -1,20 +1,23 @@
 import "dotenv/config";
 
-import Joi from "joi";
+import Joi, { string } from "joi";
 import { ClientOptions, Intents, LimitedCollection, Options } from "discord.js";
+import validateString from "utils/string";
 
 function validateEnv() {
     const schema = Joi.object({
         NODE_ENV: Joi.string().valid("development", "production").required(),
-        DEV_GUILD: Joi.string().required(),
+        GUILD: Joi.string(),
         OWNERS: Joi.string().default("[]"),
         DISCORD_TOKEN: Joi.string().required(),
-    })
-        .unknown();
+    }).unknown();
 
     const { error, value } = schema.prefs({ errors: { label: "key" } }).validate(process.env);
 
     if (error) throw new Error(`Failed to validate ProcessEnv: ${error.message}`);
+
+    if (!validateString(process.env.GUILD) && process.env.NODE_ENV === "development")
+        throw new Error("Failed to validate ProcessEnv: GUILD must not be non-existent, empty or only contains whitespaces on development builds.");
 
     return value;
 }
@@ -50,6 +53,6 @@ export const clientOptions: ClientOptions = {
 const value = validateEnv();
 
 export const nodeEnv: "development" | "production" = value.NODE_ENV;
-export const devGuild = value.DEV_GUILD;
+export const guild = value.GUILD;
 export const owners: string[] = JSON.parse(value.OWNERS);
 export const token = value.DISCORD_TOKEN;

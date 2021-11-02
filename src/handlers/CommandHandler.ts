@@ -6,6 +6,7 @@ import { Routes } from "discord-api-types/v9";
 
 import { Client } from "structures/Client";
 import { Command } from "structures/Command";
+import validateString from "utils/string";
 
 export class CommandHandler {
 	client: Client;
@@ -34,10 +35,10 @@ export class CommandHandler {
 
 		try {
 			await rest.put(
-				this.client.config.nodeEnv === "production"
+				!validateString(this.client.config.guild)
 					// client.user.id will be undefined if this function is not called when ready.
-					? Routes.applicationCommands(this.client.user!.id)
-					: Routes.applicationGuildCommands(this.client.user!.id, this.client.config.devGuild),
+					? Routes.applicationCommands(this.client.application!.id)
+					: Routes.applicationGuildCommands(this.client.application!.id, this.client.config.guild),
 				{ body }
 			);
 
