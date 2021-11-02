@@ -1,6 +1,6 @@
 import "dotenv/config";
 
-import Joi, { string } from "joi";
+import Joi from "joi";
 import { ClientOptions, Intents, LimitedCollection, Options } from "discord.js";
 import validateString from "utils/string";
 
